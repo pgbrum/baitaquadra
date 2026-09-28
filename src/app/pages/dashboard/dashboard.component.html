@@ -1,1 +1,57 @@
-<p>dashboard works!</p>
+<header class="mb-8">
+  <h1 class="text-3xl font-bold text-neutral-900">Visão Geral</h1>
+  <p class="text-gray-500 mt-1">Acompanhe o desempenho de hoje.</p>
+</header>
+
+<div class="grid grid-cols-3 gap-6 mb-8">
+  <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+    <p class="text-gray-500 font-medium text-sm">Reservas Hoje</p>
+    <div class="flex items-end gap-2 mt-4">
+      <h2 class="text-4xl font-bold text-neutral-900">48</h2>
+      <span class="text-primary text-sm font-bold flex items-center mb-1">↑ 12%</span>
+    </div>
+  </div>
+  <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+    <p class="text-gray-500 font-medium text-sm">Ocupação Atual</p>
+    <h2 class="text-4xl font-bold text-neutral-900 mt-4">85%</h2>
+  </div>
+  <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+    <p class="text-gray-500 font-medium text-sm">Receita (Mês)</p>
+    <h2 class="text-4xl font-bold text-neutral-900 mt-4">R$ 24k</h2>
+  </div>
+</div>
+
+<div class="grid grid-cols-3 gap-6">
+  <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 col-span-1">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-lg font-bold text-neutral-900">Próximos Jogos</h3>
+      <button class="text-gray-400 hover:text-gray-600">•••</button>
+    </div>
+    <div class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-green-100 text-primary flex items-center justify-center font-bold text-sm">MC</div>
+          <div>
+            <p class="font-bold text-sm text-neutral-900">Marcos Costa</p>
+            <p class="text-xs text-gray-500 mt-0.5">Quadra 1 • 14:00 - 15:30</p>
+          </div>
+        </div>
+        <span class="text-[10px] font-bold px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full">CONFIRMADO</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 col-span-2">
+    <div class="flex justify-between items-center mb-6">
+      <h3 class="text-lg font-bold text-neutral-900">Ocupação Semanal</h3>
+      <div class="flex gap-4 text-xs font-medium text-gray-500">
+        <span class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-primary"></div> Manhã</span>
+        <span class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-tertiary"></div> Tarde</span>
+        <span class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-secondary"></div> Noite</span>
+      </div>
+    </div>
+    <div class="h-48 w-full bg-gray-50 border border-gray-100 rounded-xl flex items-center justify-center text-gray-400 text-sm">
+      (Gráfico de Barras aqui)
+    </div>
+  </div>
+</div>
