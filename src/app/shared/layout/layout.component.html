@@ -1,0 +1,49 @@
+<div class="flex h-screen overflow-hidden bg-neutral-100 font-sans">
+  <aside class="w-64 bg-white border-r border-gray-200 flex flex-col justify-between z-10 shrink-0">
+    <div>
+      <div class="p-6 flex items-center gap-3">
+        <div class="text-primary font-bold text-xl flex items-center gap-2">
+          <div class="w-6 h-6 border-2 border-primary rounded-md"></div>
+          BaitaQuadra
+        </div>
+      </div>
+      <nav class="px-4 space-y-2 mt-4">
+        <a routerLink="/dashboard" routerLinkActive="!bg-primary !text-white" class="flex items-center gap-3 px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 font-semibold cursor-pointer transition-colors">
+          Dashboard
+        </a>
+        <a routerLink="/agenda" routerLinkActive="!bg-primary !text-white" class="flex items-center gap-3 px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 font-semibold cursor-pointer transition-colors">
+          Agenda
+        </a>
+        <a routerLink="/quadras" routerLinkActive="!bg-primary !text-white" class="flex items-center gap-3 px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 font-semibold cursor-pointer transition-colors">
+          Quadras
+        </a>
+        <a routerLink="/clientes" routerLinkActive="!bg-primary !text-white" class="flex items-center gap-3 px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 font-semibold cursor-pointer transition-colors">
+          Clientes
+        </a>
+      </nav>
+    </div>
+    <div class="p-4 border-t border-gray-200">
+      <button class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-colors">Configurações</button>
+      <button class="w-full flex items-center gap-2 px-4 py-3 mt-2 text-gray-500 hover:text-gray-800 font-medium">Sair</button>
+    </div>
+  </aside>
+
+  <main class="flex-1 flex flex-col h-screen overflow-hidden">
+    <header class="bg-white border-b border-gray-200 h-20 flex items-center justify-between px-8 shrink-0">
+      <div class="flex-1 max-w-md relative">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+        <input type="text" placeholder="Buscar..." class="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm outline-none focus:border-primary transition-colors">
+      </div>
+      <div class="flex items-center gap-6">
+         <div class="flex gap-4 text-gray-600 text-lg">
+           <button class="hover:text-primary">🔔</button>
+           <button class="hover:text-primary">👤</button>
+         </div>
+         <button class="bg-primary text-white px-6 py-2.5 rounded-lg font-bold text-sm hover:bg-green-800 transition-colors">Nova Reserva</button>
+      </div>
+    </header>
+    <div class="flex-1 overflow-y-auto p-8">
+       <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
