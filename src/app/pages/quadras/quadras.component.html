@@ -1,1 +1,43 @@
-<p>quadras works!</p>
+<header class="mb-8">
+  <h1 class="text-3xl font-bold text-primary">Quadras</h1>
+  <p class="text-gray-500 mt-1">Gerencie o status e a disponibilidade de todas as quadras.</p>
+</header>
+
+<div class="grid grid-cols-4 gap-4 mb-8">
+  <div class="bg-white p-4 rounded-xl shadow-sm flex flex-col border border-gray-100">
+    <span class="text-gray-500 text-sm">Total</span>
+    <span class="text-3xl font-bold mt-1">6</span>
+  </div>
+  <div class="bg-white p-4 rounded-xl shadow-sm flex flex-col border border-gray-100">
+    <span class="text-gray-500 text-sm">Disponível</span>
+    <span class="text-3xl font-bold text-primary mt-1">3</span>
+  </div>
+  <div class="bg-white p-4 rounded-xl shadow-sm flex flex-col border border-gray-100">
+    <span class="text-gray-500 text-sm">Ocupada</span>
+    <span class="text-3xl font-bold text-secondary mt-1">2</span>
+  </div>
+  <div class="bg-white p-4 rounded-xl shadow-sm flex flex-col border border-gray-100">
+    <span class="text-gray-500 text-sm">Manutenção</span>
+    <span class="text-3xl font-bold text-tertiary mt-1">1</span>
+  </div>
+</div>
+
+<div class="grid grid-cols-3 gap-6">
+  <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+    <div class="h-32 bg-gray-200 relative">
+      <span class="absolute top-2 right-2 bg-primary text-white text-xs px-3 py-1 rounded-full font-bold">Disponível</span>
+    </div>
+    <div class="p-5">
+      <h3 class="text-xl font-bold">Quadra 01</h3>
+      <p class="text-sm text-gray-500 mb-4">Areia Fina • Beach Tennis</p>
+      <div class="flex justify-between text-sm text-gray-600 mb-6">
+        <span>Iluminação LED</span>
+        <span>16m x 8m</span>
+      </div>
+      <div class="flex gap-2">
+        <button class="flex-1 bg-primary text-white py-2 rounded-lg font-bold hover:bg-green-800 transition-colors">Reservar</button>
+        <button class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg font-bold hover:bg-gray-50 transition-colors">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
