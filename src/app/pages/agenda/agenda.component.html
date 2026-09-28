@@ -1,1 +1,96 @@
-<p>agenda works!</p>
+<header class="flex justify-between items-center mb-6">
+  <h1 class="text-2xl font-bold text-neutral-900">Agenda de Hoje, 24 Out</h1>
+</header>
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-[600px]">
+  
+  <!-- Cabeçalho do Grid -->
+  <div class="grid grid-cols-[80px_1fr_1fr_1fr_1fr] border-b border-gray-100">
+    <div class="p-4 flex items-end justify-center text-xs text-gray-400 font-medium border-r border-gray-100">
+      Hora
+    </div>
+    
+    @for (quadra of quadras; track quadra.nome) {
+      <div class="p-4 text-center border-r border-gray-100 last:border-0 flex flex-col items-center justify-center gap-1">
+        <h3 class="font-bold text-neutral-900">{{ quadra.nome }}</h3>
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase" 
+              [ngClass]="quadra.bg + ' ' + quadra.cor">
+          {{ quadra.tipo }}
+        </span>
+      </div>
+    }
+  </div>
+
+  <!-- Corpo do Grid -->
+  <div class="flex-1 overflow-y-auto">
+    <!-- Usamos relative para poder posicionar os "cards" de reserva por cima das linhas -->
+    <div class="grid grid-cols-[80px_1fr_1fr_1fr_1fr] relative min-h-[500px]">
+      
+      <!-- Coluna de Horas -->
+      <div class="border-r border-gray-100">
+        @for (hora of horas; track hora) {
+          <div class="h-24 border-b border-gray-100 flex items-start justify-center pt-2 text-xs text-gray-500 font-medium">
+            {{ hora }}
+          </div>
+        }
+      </div>
+
+      <!-- Coluna Quadra 1 -->
+      <div class="border-r border-gray-100 relative">
+        @for (hora of horas; track hora) {
+          <div class="h-24 border-b border-gray-50"></div>
+        }
+        <!-- Card de Reserva (Exemplo Posicionado Absolutamente) -->
+        <!-- top-0 = 08:00, h-36 = 1h30 de duração (24 = 1h, logo 24+12 = 36) -->
+        <div class="absolute top-0 left-2 right-2 h-36 bg-tertiary text-yellow-900 p-3 rounded-lg shadow-sm z-10 border border-yellow-400">
+          <span class="text-[10px] font-bold bg-white/30 px-2 py-0.5 rounded mb-1 inline-block">AULA</span>
+          <p class="font-bold text-sm leading-tight">Iniciante - Prof. João</p>
+          <p class="text-xs opacity-80 mt-1">08:00 - 09:30 (4 alunos)</p>
+        </div>
+      </div>
+
+      <!-- Coluna Quadra 2 -->
+      <div class="border-r border-gray-100 relative">
+        @for (hora of horas; track hora) {
+          <div class="h-24 border-b border-gray-50"></div>
+        }
+        <!-- Card de Reserva -->
+        <!-- top-24 = começa às 09:00, h-36 = 1h30 de duração -->
+        <div class="absolute top-24 left-2 right-2 h-36 bg-primary text-white p-3 rounded-lg shadow-sm z-10">
+          <span class="text-[10px] font-bold bg-white/20 px-2 py-0.5 rounded mb-1 inline-block">LOCAÇÃO</span>
+          <p class="font-bold text-sm leading-tight">Carlos Silva</p>
+          <p class="text-xs opacity-90 mt-1">09:00 - 10:30 - Pago</p>
+        </div>
+      </div>
+
+      <!-- Coluna Quadra 3 -->
+      <div class="border-r border-gray-100 relative">
+        @for (hora of horas; track hora) {
+          <div class="h-24 border-b border-gray-50"></div>
+        }
+        <!-- Card Torneio -->
+        <!-- top-0 = 08:00, h-96 = 4 horas de duração -->
+        <div class="absolute top-0 left-2 right-2 h-[384px] bg-secondary text-white p-3 rounded-lg shadow-sm z-10">
+          <span class="text-[10px] font-bold bg-white/20 px-2 py-0.5 rounded mb-1 inline-block">TORNEIO</span>
+          <p class="font-bold text-lg leading-tight mt-1">Copa Outono 2023</p>
+          <p class="text-sm opacity-90">Fase de Grupos - Chave A</p>
+          <p class="text-xs opacity-90 mt-auto absolute bottom-3">08:00 - 12:00</p>
+        </div>
+      </div>
+
+      <!-- Coluna Quadra 4 (Manutenção) -->
+      <div class="relative bg-gray-50 flex items-center justify-center">
+        <!-- Linhas de fundo -->
+        <div class="absolute inset-0">
+          @for (hora of horas; track hora) {
+            <div class="h-24 border-b border-gray-200"></div>
+          }
+        </div>
+        <p class="text-gray-400 font-bold tracking-widest rotate-90 z-10 text-2xl opacity-30 whitespace-nowrap">
+          MANUTENÇÃO
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
