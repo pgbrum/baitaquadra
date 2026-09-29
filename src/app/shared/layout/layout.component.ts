@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { SidebarComponent } from '../components/sidebar/sidebar.component';
+import { HeaderComponent } from '../components/header/header.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [RouterOutlet, SidebarComponent, HeaderComponent],
   templateUrl: './layout.component.html'
 })
 export class LayoutComponent {}
