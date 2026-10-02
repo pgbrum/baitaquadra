@@ -25,8 +25,12 @@ export interface Quadra {
 
 export interface Reserva {
   id: string;
-  clienteNome: string;
-  clienteIniciais: string;
-  quadraInfo: string;
-  status: StatusReserva;
+  status: string;
+  clienteNome?: string;
+  cliente_nome?: string;
+  clienteIniciais?: string;
+  cliente_iniciais?: string;
+  quadraInfo?: string;
+  quadra_info?: string;
+  [key: string]: any; 
 }
