@@ -14,7 +14,13 @@ export class ClientesComponent implements OnInit {
   clientes = signal<Cliente[]>([]);
 
   async ngOnInit() {
+  console.log('A iniciar pedido ao Supabase...');
+  try {
     const data = await this.service.getClientes();
+    console.log('Dados recebidos do Supabase:', data);
     this.clientes.set(data);
+  } catch (error) {
+    console.error('Erro ao chamar o serviço:', error);
   }
+}
 }
