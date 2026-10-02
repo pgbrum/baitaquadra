@@ -12,8 +12,6 @@ export class BaitaQuadraService {
     const supabaseUrl = 'https://ixvhzefbcyaqcfcifsil.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml4dmh6ZWZiY3lhcWNmY2lmc2lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4ODkzNTEsImV4cCI6MjEwNjQ2NTM1MX0.b9Uef1ZDmevX3LJO77SAergMkcsM9TdWH6kiJvY9z-Q';
     
-    // A MÁGICA ESTÁ AQUI: Passamos essas opções para desligar os "timers"
-    // ocultos do Supabase que estavam travando o servidor do Angular (SSR)
     this.supabase = createClient(supabaseUrl, supabaseKey, {
       auth: {
         persistSession: false,
