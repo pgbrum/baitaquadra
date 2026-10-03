@@ -1,7 +1,7 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BaitaQuadraService } from '../../core/services/baita-quadra.service';
-import { Cliente } from '../../core/models/baita-quadra.models';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ClienteService } from '../../core/services/cliente.service';
 
 @Component({
   selector: 'app-clientes',
@@ -10,17 +10,13 @@ import { Cliente } from '../../core/models/baita-quadra.models';
   templateUrl: './clientes.component.html'
 })
 export class ClientesComponent implements OnInit {
-  private service = inject(BaitaQuadraService);
-  clientes = signal<Cliente[]>([]);
+  private clienteService = inject(ClienteService);
+  
+  // Transforma o BehaviorSubject do serviço num Signal automaticamente
+  clientes = toSignal(this.clienteService.clientes$, { initialValue: [] });
 
-  async ngOnInit() {
-  console.log('A iniciar pedido ao Supabase...');
-  try {
-    const data = await this.service.getClientes();
-    console.log('Dados recebidos do Supabase:', data);
-    this.clientes.set(data);
-  } catch (error) {
-    console.error('Erro ao chamar o serviço:', error);
+  ngOnInit() {
+    // Manda o serviço buscar os dados no Supabase. O ecrã atualiza sozinho!
+    this.clienteService.carregarClientes();
   }
-}
 }

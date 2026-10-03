@@ -1,7 +1,7 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BaitaQuadraService } from '../../core/services/baita-quadra.service';
-import { Reserva } from '../../core/models/baita-quadra.models';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ReservaService } from '../../core/services/reserva.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,17 +10,11 @@ import { Reserva } from '../../core/models/baita-quadra.models';
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  private service = inject(BaitaQuadraService);
+  private reservaService = inject(ReservaService);
   
-  proximosJogos = signal<Reserva[]>([]);
+  proximosJogos = toSignal(this.reservaService.reservas$, { initialValue: [] });
 
-  async ngOnInit() {
-    try {
-      const jogos = await this.service.getProximosJogos();
-      // O || [] garante que mesmo sem dados a tela não quebre
-      this.proximosJogos.set(jogos || []);
-    } catch (error) {
-      console.error('Erro ao carregar próximos jogos:', error);
-    }
+  ngOnInit() {
+    this.reservaService.carregarProximosJogos();
   }
 }
