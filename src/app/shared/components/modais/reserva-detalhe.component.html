@@ -1,0 +1,61 @@
+@if (atual(); as r) {
+  <div class="flex flex-col">
+    <div class="px-6 pt-6 pb-4 border-b border-gray-100 flex justify-between items-start gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-green-100 text-primary flex items-center justify-center font-bold">
+          {{ r.clienteIniciais }}
+        </div>
+        <div>
+          <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wide">{{ r.tipo }}</span>
+          <h2 class="text-xl font-bold text-neutral-900 leading-tight">{{ r.clienteNome }}</h2>
+        </div>
+      </div>
+      <button type="button" (click)="fechar()" class="text-gray-400 hover:text-gray-600 text-xl leading-none" aria-label="Fechar">×</button>
+    </div>
+
+    <div class="px-6 py-5 space-y-3 text-sm">
+      <div class="flex justify-between"><span class="text-gray-500">Quadra</span><span class="font-semibold">{{ r.quadraNome }}</span></div>
+      <div class="flex justify-between"><span class="text-gray-500">Data</span><span class="font-semibold">{{ dataFormatada(r.inicio) }}</span></div>
+      <div class="flex justify-between"><span class="text-gray-500">Horário</span><span class="font-semibold">{{ r.horario }}</span></div>
+      @if (r.descricao) {
+        <div class="flex justify-between"><span class="text-gray-500">Observação</span><span class="font-semibold text-right">{{ r.descricao }}</span></div>
+      }
+      <div class="flex justify-between"><span class="text-gray-500">Valor</span><span class="font-bold text-primary">{{ r.valor | currency:'BRL':'symbol' }}</span></div>
+      <div class="flex justify-between items-center">
+        <span class="text-gray-500">Pagamento</span>
+        <span class="text-xs font-bold px-2 py-1 rounded" [ngClass]="r.pago ? 'bg-green-100 text-primary' : 'bg-yellow-100 text-yellow-700'">
+          {{ r.pago ? 'PAGO' : 'PENDENTE' }}
+        </span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span class="text-gray-500">Status</span>
+        <span class="text-[10px] font-bold px-2 py-1 rounded-full uppercase"
+              [ngClass]="{
+                'bg-yellow-100 text-yellow-700': r.status === 'CONFIRMADO',
+                'bg-red-100 text-secondary': r.status === 'ATRASADO' || r.status === 'CANCELADO',
+                'bg-green-100 text-primary': r.status === 'EM ANDAMENTO'
+              }">
+          {{ r.status }}
+        </span>
+      </div>
+    </div>
+
+    @if (r.status !== 'CANCELADO') {
+      <div class="px-6 py-4 border-t border-gray-100 flex flex-wrap gap-2 justify-end">
+        @if (!r.pago) {
+          <button type="button" (click)="pagar()" [disabled]="processando()" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-green-800 disabled:opacity-60">Registrar pagamento</button>
+        }
+        @if (r.status === 'ATRASADO') {
+          <button type="button" (click)="status('CONFIRMADO', 'Reserva confirmada.')" [disabled]="processando()" class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-50 disabled:opacity-60">Confirmar</button>
+        } @else {
+          <button type="button" (click)="status('ATRASADO', 'Reserva marcada como atrasada.')" [disabled]="processando()" class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-50 disabled:opacity-60">Marcar atraso</button>
+        }
+        <button type="button" (click)="cancelar()" [disabled]="processando()"
+                class="px-4 py-2 rounded-lg text-sm font-bold disabled:opacity-60 transition-colors"
+                [ngClass]="confirmarCancelamento() ? 'bg-secondary text-white' : 'text-secondary hover:bg-red-50'">
+          {{ confirmarCancelamento() ? 'Confirmar cancelamento' : 'Cancelar reserva' }}
+        </button>
+      </div>
+    }
+  </div>
+}

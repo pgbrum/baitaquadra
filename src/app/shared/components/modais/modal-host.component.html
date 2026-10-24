@@ -1,0 +1,22 @@
+@if (modal.atual(); as m) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-neutral-900/40 animate-[fadeIn_.15s_ease-out]" (click)="modal.fechar()"></div>
+    <div role="dialog" aria-modal="true"
+         class="relative bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden animate-[subir_.2s_ease-out]">
+      @switch (m.tipo) {
+        @case ('reserva') {
+          <app-reserva-form [quadraIdInicial]="m.quadraId" [dataInicial]="m.data" [horaInicial]="m.hora" />
+        }
+        @case ('detalheReserva') {
+          <app-reserva-detalhe [reserva]="m.reserva" />
+        }
+        @case ('cliente') {
+          <app-cliente-form [cliente]="m.cliente" />
+        }
+        @case ('quadra') {
+          <app-quadra-form [quadra]="m.quadra" />
+        }
+      }
+    </div>
+  </div>
+}

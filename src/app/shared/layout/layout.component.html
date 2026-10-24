@@ -1,0 +1,19 @@
+<div class="flex h-screen overflow-hidden bg-neutral-100 font-sans">
+  
+  <!-- Componente Lateral Isolado -->
+  <app-sidebar></app-sidebar>
+
+  <main class="flex-1 flex flex-col h-screen overflow-hidden">
+    
+    <!-- Componente Superior Isolado -->
+    <app-header></app-header>
+    
+    <div class="flex-1 overflow-y-auto p-8">
+       <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <!-- Modais (Nova Reserva, Editar...) e avisos compartilhados por todas as telas -->
+  <app-modal-host></app-modal-host>
+  <app-toast></app-toast>
+</div>

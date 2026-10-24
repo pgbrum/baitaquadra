@@ -1,0 +1,81 @@
+<form (ngSubmit)="salvar()" class="flex flex-col">
+  <div class="px-6 pt-6 pb-4 border-b border-gray-100 flex justify-between items-start">
+    <div>
+      <h2 class="text-xl font-bold text-neutral-900">{{ quadra ? 'Editar ' + quadra.nome : 'Nova Quadra' }}</h2>
+      <p class="text-sm text-gray-500 mt-0.5">Dados exibidos na tela de quadras e na agenda.</p>
+    </div>
+    <button type="button" (click)="fechar()" class="text-gray-400 hover:text-gray-600 text-xl leading-none" aria-label="Fechar">×</button>
+  </div>
+
+  <div class="px-6 py-5 space-y-4">
+    <!-- Status em destaque: é o que mais se altera no dia a dia -->
+    <div>
+      <span class="block text-sm font-medium text-gray-700 mb-1">Status</span>
+      <div class="grid grid-cols-3 gap-2">
+        @for (s of statusOpcoes; track s) {
+          <button type="button" (click)="form.status = s"
+                  class="py-2 rounded-lg text-xs font-bold border transition-colors"
+                  [ngClass]="form.status === s
+                    ? (s === 'Disponível' ? 'bg-primary text-white border-primary' : s === 'Ocupada' ? 'bg-secondary text-white border-secondary' : 'bg-tertiary text-yellow-900 border-tertiary')
+                    : 'border-gray-200 text-gray-600 hover:bg-gray-50'">
+            {{ s }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <label for="q-nome" class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+        <input id="q-nome" name="nome" [(ngModel)]="form.nome" placeholder="Ex.: Quadra 5" class="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-primary">
+      </div>
+      <div>
+        <label for="q-valor" class="block text-sm font-medium text-gray-700 mb-1">Valor/hora (R$)</label>
+        <input id="q-valor" name="valorHora" type="number" min="0" step="5" [(ngModel)]="form.valorHora" class="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-primary">
+      </div>
+      <div>
+        <label for="q-tipo" class="block text-sm font-medium text-gray-700 mb-1">Piso</label>
+        <select id="q-tipo" name="tipo" [(ngModel)]="form.tipo" class="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-primary bg-white">
+          @for (p of pisos; track p) { <option [value]="p">{{ p }}</option> }
+        </select>
+      </div>
+      <div>
+        <label for="q-esporte" class="block text-sm font-medium text-gray-700 mb-1">Esporte</label>
+        <select id="q-esporte" name="esporte" [(ngModel)]="form.esporte" class="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-primary bg-white">
+          @for (e of esportes; track e) { <option [value]="e">{{ e }}</option> }
+        </select>
+      </div>
+      <div>
+        <label for="q-ilum" class="block text-sm font-medium text-gray-700 mb-1">Iluminação</label>
+        <select id="q-ilum" name="iluminacao" [(ngModel)]="form.iluminacao" class="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-primary bg-white">
+          <option>Iluminação LED</option>
+          <option>Iluminação Halógena</option>
+          <option>Sem iluminação</option>
+        </select>
+      </div>
+      <div>
+        <label for="q-dim" class="block text-sm font-medium text-gray-700 mb-1">Dimensões</label>
+        <input id="q-dim" name="dimensoes" [(ngModel)]="form.dimensoes" placeholder="16m x 8m" class="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none focus:border-primary">
+      </div>
+    </div>
+
+    @if (erro()) {
+      <p class="text-sm text-secondary bg-red-50 border border-red-100 rounded-lg px-3 py-2">{{ erro() }}</p>
+    }
+  </div>
+
+  <div class="px-6 py-4 border-t border-gray-100 flex items-center gap-2">
+    @if (quadra) {
+      <button type="button" (click)="excluir()" [disabled]="salvando()"
+              class="px-4 py-2 rounded-lg text-sm font-bold disabled:opacity-60 transition-colors"
+              [ngClass]="confirmarExclusao() ? 'bg-secondary text-white' : 'text-secondary hover:bg-red-50'">
+        {{ confirmarExclusao() ? 'Excluir quadra e reservas' : 'Excluir' }}
+      </button>
+    }
+    <div class="flex-1"></div>
+    <button type="button" (click)="fechar()" class="px-4 py-2 rounded-lg font-semibold text-gray-600 hover:bg-gray-100">Cancelar</button>
+    <button type="submit" [disabled]="salvando()" class="bg-primary text-white px-5 py-2 rounded-lg font-bold hover:bg-green-800 transition-colors disabled:opacity-60">
+      {{ salvando() ? 'Salvando...' : 'Salvar' }}
+    </button>
+  </div>
+</form>
